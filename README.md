@@ -1,5 +1,4 @@
-# Chekku
-[![Build Status](https://secure.travis-ci.org/ys/chekku.png)](http://travis-ci.org/ys/chekku)
+# Chekku [![Build Status](https://secure.travis-ci.org/ys/chekku.png)](http://travis-ci.org/ys/chekku)
 The gem that checks your software dependencies
 
 ## WARNING
