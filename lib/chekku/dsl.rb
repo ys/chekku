@@ -10,7 +10,7 @@ class Chekku::Dsl < Thor::Group
   end
 
   def check(name, version = nil, args ={})
-    Chekku::GenericChecker.new(name, version, args).chekku!
+    say Chekku::GenericChecker.new(name, version, args).chekku!
   end
 
   def read_file(file)

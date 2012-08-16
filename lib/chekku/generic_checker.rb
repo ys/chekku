@@ -8,9 +8,9 @@ class Chekku::GenericChecker < Thor::Shell::Basic
 
   def chekku!
     if which_exists?
-      puts "\e[32m#{@name} exists!\e[0m"
+      "\e[32m#{@name} exists!\e[0m"
     else
-      puts "\e[31mI think you must install #{@name}\e[0m"
+      "\e[31mI think you must install #{@name}\e[0m"
     end
   end
 
