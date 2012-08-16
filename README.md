@@ -1,6 +1,10 @@
 # Chekku
 
-The future gem that checks your software dependencies
+The gem that checks your software dependencies
+
+## WARNING
+
+**This gem is in alpha mode! Please use it carefully.**
 
 ## Installation
 
@@ -19,10 +23,24 @@ Or install it yourself as:
 ## Usage
 
 ```
-  $ chekku verify
-  $ chekku install (may not work before a while)
+  $ chekku checks       # Check your software dependencies
+  $ chekku help [TASK]  # Describe available tasks or one specific task
 ```
 
+## Chekkufile
+
+This is the file that contains the dependencies we need to check
+For the moment only the name is executable is validated
+
+Chekkufile :
+
+```ruby
+ check 'mysql', '>= 5.0', env: :production
+ check 'redis-server'
+ check 'mongod', '~> 1.0', env: :development, must_run: true
+```
+
+**As you can see, you have to set the executable name for the moment, I'm trying to find an easy way to check for software which executables aren't name as the project (see imagemagick)**
 ## Contributing
 
 1. Fork it
