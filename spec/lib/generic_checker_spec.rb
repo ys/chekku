@@ -11,9 +11,9 @@ describe Chekku::GenericChecker do
   end
 
   context "The command does not exist" do
-    let(:invalid_checker) { Chekku::GenericChecker.new('lsdahpdahiofaiofhaoigfhoaugzza', nil, nil) }
+    let(:invalid_checker) { Chekku::GenericChecker.new('lsaadahpdahiofaiofhaoigfhoaugzza', nil, nil) }
     it "should return a green string" do
-      invalid_checker.chekku!.should == "\e[31mI think you must install lsdahpdahiofaiofhaoigfhoaugzza\e[0m"
+      invalid_checker.chekku!.should == "\e[31mI think you must install lsaadahpdahiofaiofhaoigfhoaugzza\e[0m"
     end
   end
 
