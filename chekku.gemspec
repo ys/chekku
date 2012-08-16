@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = Chekku::VERSION
   gem.authors       = ['Yannick Schutz']
   gem.email         = ['yannick.schutz@gmail.com']
-  gem.description   = %q{Chekku checks all your software dependencies in every environment. It will helps you installing them too.}
+  gem.description   = %q{Chekku checks all your software dependencies from development to production.}
   gem.summary       = %q{Chekku: software dependencies checker}
   gem.homepage      = 'http://ys.github.com/chekku'
 
