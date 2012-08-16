@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Chekku by ys</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Chekku</h1>
+        <p>That gem knows if your software dependencies are met!</p>
+
+        <p class="view"><a href="https://github.com/ys/chekku">View the Project on GitHub <small>ys/chekku</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ys/chekku/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ys/chekku/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ys/chekku">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Chekku</h1>
+
+<p>The gem that checks your software dependencies</p>
+
+<h2>WARNING</h2>
+
+<p><strong>This gem is in alpha mode! Please use it carefully.</strong></p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem 'chekku'
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install chekku
+</code></pre>
+
+<h2>Usage</h2>
+
+<pre><code>  $ chekku checks       # Check your software dependencies
+  $ chekku help [TASK]  # Describe available tasks or one specific task
+</code></pre>
+
+<h2>Chekkufile</h2>
+
+<p>This is the file that contains the dependencies we need to check
+For the moment only the name is executable is validated</p>
+
+<p>Chekkufile :</p>
+
+<div class="highlight"><pre> <span class="n">check</span> <span class="s1">'mysql'</span><span class="p">,</span> <span class="s1">'&gt;= 5.0'</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="ss">:production</span>
+ <span class="n">check</span> <span class="s1">'redis-server'</span>
+ <span class="n">check</span> <span class="s1">'mongod'</span><span class="p">,</span> <span class="s1">'~&gt; 1.0'</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="ss">:development</span><span class="p">,</span> <span class="n">must_run</span><span class="p">:</span> <span class="kp">true</span>
+</pre></div>
+
+<p><strong>As you can see, you have to set the executable name for the moment, I'm trying to find an easy way to check for software which executables aren't name as the project (see imagemagick)</strong></p>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ys">ys</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
