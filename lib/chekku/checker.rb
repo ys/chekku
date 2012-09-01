@@ -23,9 +23,9 @@ class Chekku::Checker < Thor
   end
 
   def verify_chekku_file_existence
-      chekkufile = Pathname.new(@chekkufile).expand_path
+    chekkufile = Pathname.new(@chekkufile).expand_path
 
-      unless chekkufile.file?
+    unless chekkufile.file?
       say "#{chekkufile} not found"
       exit -1
     end
