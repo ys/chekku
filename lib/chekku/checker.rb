@@ -1,5 +1,6 @@
 require 'pathname'
 require_relative 'dsl'
+require_relative 'definitions_service'
 
 class Chekku::Checker < Thor
   include Thor::Actions
