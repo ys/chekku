@@ -53,7 +53,7 @@ imagemagick:
   executable: 'convert'
 ```
 
-** I'm currently working on a webapp to define online all the values for this file. So it will be community based. **
+**I'm currently working on a webapp to define online all the values for this file. So it will be community based.**
 
 ## Future
 
