@@ -1,0 +1,8 @@
+mysql:
+  executable: 'mysqld'
+postgres:
+  executable: 'postgres'
+redis:
+  executable: 'redis-server'
+imagemagick:
+  executable: 'convert'

@@ -1,0 +1,3 @@
+check 'mysql'
+check 'redis'
+check 'imagemagick'
