@@ -22,24 +22,44 @@ Or install it yourself as:
 ## Usage
 
 ```
-  $ chekku checks       # Check your software dependencies
+  $ chekku checks       # Check your software dependencies (default task)
   $ chekku help [TASK]  # Describe available tasks or one specific task
 ```
 
 ## Chekkufile
 
 This is the file that contains the dependencies we need to check
-For the moment only the name is executable is validated
 
 Chekkufile :
 
 ```ruby
  check 'mysql', '>= 5.0', env: :production
- check 'redis-server'
+ check 'redis'
  check 'mongod', '~> 1.0', env: :development, must_run: true
 ```
 
-**As you can see, you have to set the executable name for the moment, I'm trying to find an easy way to check for software which executables aren't name as the project (see imagemagick)**
+## def.yml
+
+This file is in an hidden folder of your home and should contain information about how to check the existance, versions,... of a dependency
+
+~/.chekku/def.yml :
+
+```
+mysql:
+  executable: 'mysqld'
+redis:
+  executable: 'redis-server'
+imagemagick:
+  executable: 'convert'
+```
+
+** I'm currently working on a webapp to define online all the values for this file. So it will be community based. **
+
+## Future
+
+I'll try to have a version that works for checking the version of the dependecy in the near future.
+And will add tests to check if the service is running or not.
+
 ## Contributing
 
 1. Fork it
