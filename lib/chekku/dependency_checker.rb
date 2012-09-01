@@ -2,7 +2,6 @@
 class Chekku::DependencyChecker
 
   attr_accessor :definitions_service
-  attr_accessor :definition
 
   def self.with(definitions_service)
     new definitions_service

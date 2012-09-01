@@ -2,10 +2,9 @@ require_relative 'fetcher'
 
 class Chekku::DefinitionsService
 
-  attr_accessor :definitions, :chekkufile
+  attr_accessor :definitions
 
   def load_definitions_for(file)
-    @chekkufile = file
     @definitions = Chekku::Fetcher.fetch_for_chekkufile file
   end
 
