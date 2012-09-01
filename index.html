@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Chekku <a href='http://travis-ci.org/ys/chekku'><img src='http://travis-ci.org/ys/chekku.png'/></a></h1>
+        <h1>Chekku</h1>
         <p>That gem knows if your software dependencies are met!</p>
 
         <p class="view"><a href="https://github.com/ys/chekku">View the Project on GitHub <small>ys/chekku</small></a></p>
@@ -28,7 +28,8 @@
         </ul>
       </header>
       <section>
-        <h1>Chekku</h1>
+        <h1>Chekku <a href="http://travis-ci.org/ys/chekku"><img src="https://secure.travis-ci.org/ys/chekku.png" alt="Build Status"></a>
+</h1>
 
 <p>The gem that checks your software dependencies</p>
 
@@ -55,23 +56,41 @@
 
 <h2>Usage</h2>
 
-<pre><code>  $ chekku checks       # Check your software dependencies
+<pre><code>  $ chekku checks       # Check your software dependencies (default task)
   $ chekku help [TASK]  # Describe available tasks or one specific task
 </code></pre>
 
 <h2>Chekkufile</h2>
 
-<p>This is the file that contains the dependencies we need to check
-For the moment only the name is executable is validated</p>
+<p>This is the file that contains the dependencies we need to check</p>
 
 <p>Chekkufile :</p>
 
 <div class="highlight"><pre> <span class="n">check</span> <span class="s1">'mysql'</span><span class="p">,</span> <span class="s1">'&gt;= 5.0'</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="ss">:production</span>
- <span class="n">check</span> <span class="s1">'redis-server'</span>
+ <span class="n">check</span> <span class="s1">'redis'</span>
  <span class="n">check</span> <span class="s1">'mongod'</span><span class="p">,</span> <span class="s1">'~&gt; 1.0'</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="ss">:development</span><span class="p">,</span> <span class="n">must_run</span><span class="p">:</span> <span class="kp">true</span>
 </pre></div>
 
-<p><strong>As you can see, you have to set the executable name for the moment, I'm trying to find an easy way to check for software which executables aren't name as the project (see imagemagick)</strong></p>
+<h2>def.yml</h2>
+
+<p>This file is in an hidden folder of your home and should contain information about how to check the existance, versions,... of a dependency</p>
+
+<p>~/.chekku/def.yml :</p>
+
+<pre><code>mysql:
+  executable: 'mysqld'
+redis:
+  executable: 'redis-server'
+imagemagick:
+  executable: 'convert'
+</code></pre>
+
+<p><strong>I'm currently working on a webapp to define online all the values for this file. So it will be community based.</strong></p>
+
+<h2>Future</h2>
+
+<p>I'll try to have a version that works for checking the version of the dependecy in the near future.
+And will add tests to check if the service is running or not.</p>
 
 <h2>Contributing</h2>
 
