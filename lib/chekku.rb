@@ -1,6 +1,7 @@
-require "chekku/version"
+require 'chekku/version'
 require 'thor'
 require 'thor/group'
+require 'chekku/errors'
 
 module Chekku
   class Command
