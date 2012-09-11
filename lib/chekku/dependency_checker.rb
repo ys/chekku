@@ -22,7 +22,7 @@ class Chekku::DependencyChecker
 
   def get_and_check_definition!(name)
     @definitions_service.definition_for(name) ||
-      raise(DefinitionNotFoundError, "#{name} definition not be found. Check ~/.chekku/def.yml")
+      raise DefinitionNotFoundError, "#{name} definition not be found. Check ~/.chekku/def.yml"
   end
 
   def exists?(definition)
@@ -37,7 +37,7 @@ class Chekku::DependencyChecker
   end
 
   def found?(command)
-    system("which #{command} > /dev/null")
+    system "which #{command} > /dev/null"
   end
 
   def sane?(command)
@@ -45,6 +45,6 @@ class Chekku::DependencyChecker
   end
 
   def sanitize(command)
-    command.gsub(/&|"|'|;|\s/, "")
+    command.gsub /&|"|'|;|\s/, ""
   end
 end
