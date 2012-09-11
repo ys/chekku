@@ -22,7 +22,7 @@ class Chekku::DependencyChecker
 
   def get_and_check_definition!(name)
     @definitions_service.definition_for(name) ||
-      raise DefinitionNotFoundError, "#{name} definition not be found. Check ~/.chekku/def.yml"
+      raise(DefinitionNotFoundError, "#{name} definition not be found. Check ~/.chekku/def.yml")
   end
 
   def exists?(definition)
@@ -31,8 +31,8 @@ class Chekku::DependencyChecker
   end
 
   def verify_command!(command)
-    raise AppNameNotStringError, 'You need to use strings for app names' unless command.is_a?(String)
-    raise AppNameNotSaneError, "Sorry the app name '#{@current_app}' is not sane" unless sane?(command)
+    raise(AppNameNotStringError, 'You need to use strings for app names') unless command.is_a?(String)
+    raise(AppNameNotSaneError, "Sorry the app name '#{@current_app}' is not sane") unless sane?(command)
     true
   end
 
