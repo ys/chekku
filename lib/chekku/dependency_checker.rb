@@ -37,7 +37,7 @@ class Chekku::DependencyChecker
   end
 
   def found?(command)
-    system "which #{command} > /dev/null"
+    system "which #{command} > /dev/null 2>&1"
   end
 
   def sane?(command)
