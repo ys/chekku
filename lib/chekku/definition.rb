@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Chekku::Definition
 
-  attr_accessor :name, :executable, :errors
+  attr_accessor :name, :executable, :version_checker, :errors
 
   def self.load(definitions_hash = {})
     [].tap do |definitions|
@@ -19,7 +19,7 @@ class Chekku::Definition
 
   def chekku(version = nil, args = {})
     if exists?
-      "Checked #{name} [\033[32m✓\033[0m]"
+      validates version, args
     else
       "Checked #{name} [\033[31m✗\033[0m] I think you must install it!"
     end
@@ -46,4 +46,27 @@ class Chekku::Definition
   def sanitized_executable
     executable.gsub /&|"|'|;|\s/, ""
   end
+
+  def validates(version, args)
+    ( !version || check_version(version)) || (!args[:must_run] || is_running?) || "Checked #{name} [\033[32m✓\033[0m]"
+  end
+
+  def is_running?
+    ps_result = `ps aux | grep #{executable}`
+    ps_result.include?(executable) && (executable == 'grep' || !ps_result.include('grep'))
+  end
+
+  def check_version(version)
+
+  end
+
+  def installed_version
+    version_matches = `#{executable} --version`.scan(/(\d+[\.\d+]*)/).flatten
+    max_dot_number_version = ''
+    version_matches.each do |version|
+      max_dot_number_version = version if version.count('.') > max_dot_number_version.count('.')
+    end
+    max_dot_number_version
+  end
+
 end
