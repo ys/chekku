@@ -9,6 +9,6 @@ class Chekku::DefinitionsService
   end
 
   def definition_for(dependency)
-    @definitions[dependency] if @definitions
+    @definitions.select{ |definition| definition.name == dependency }.first if @definitions
   end
 end

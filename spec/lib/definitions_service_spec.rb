@@ -3,10 +3,11 @@ require 'chekku/errors'
 
 describe Chekku::DefinitionsService do
 
-  describe '#load_definitions_for' do
-    let(:definitions_service) { Chekku::DefinitionsService.new }
-    let(:definitions) { { 'mysql' => { 'existance' => 'which mysqld' }} }
+  let(:definition) { Chekku::Definition.new(name: 'mysql', executable: 'mysqld')}
+  let(:definitions) { [definition] }
+  let(:definitions_service) { Chekku::DefinitionsService.new }
 
+  describe '#load_definitions_for' do
     it 'should set definitions' do
       Chekku::Fetcher.stub(:fetch_for_chekkufile).with('blabla').and_return(definitions)
       expect { definitions_service.load_definitions_for('blabla') }
@@ -15,17 +16,14 @@ describe Chekku::DefinitionsService do
   end
 
   describe '#definition_for' do
-    let(:definitions) { { 'mysql' => { 'existance' => 'which mysqld' }} }
-
     context 'definitions are set' do
-      let(:definitions_service) { Chekku::DefinitionsService.new }
       before(:each) do
         definitions_service.definitions = definitions
       end
 
       context 'existing definition' do
         it 'should return the definition of the asked element' do
-          definitions_service.definition_for('mysql').should == definitions['mysql']
+          definitions_service.definition_for('mysql').should == definitions.first
         end
       end
 
@@ -37,7 +35,6 @@ describe Chekku::DefinitionsService do
     end
 
     context 'definitions are not set' do
-      let(:definitions_service) { Chekku::DefinitionsService.new }
       it 'should return nil' do
         definitions_service.definition_for('not-existing').should == nil
       end

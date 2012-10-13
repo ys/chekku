@@ -1,5 +1,6 @@
 #encoding: utf-8
 require 'yaml'
+require_relative 'definition'
 
 class Chekku::Fetcher
 
@@ -15,6 +16,6 @@ class Chekku::Fetcher
   end
 
   def dependencies_from_file
-    @dependencies = YAML.load_file("#{CHEKKU_PATH}/def.yml")
+    @dependencies = Chekku::Definition.load(YAML.load_file("#{CHEKKU_PATH}/def.yml") || {})
   end
 end

@@ -1,8 +1,8 @@
-require_relative 'dependency_checker'
+require_relative 'definition'
 
-class Chekku::Dsl
+class Chekku::Definitions
 
-  attr_accessor :definitions_service
+  attr_accessor :definitions_service, :dependency_checker
 
   def self.evaluate(file)
     new.eval_chekkufile(file)
@@ -20,9 +20,15 @@ class Chekku::Dsl
   end
 
   def check(name, version = nil, args ={})
-    puts Chekku::DependencyChecker.with(@definitions_service).chekku(name, version, args)
+    definition = get_definition! name
+    puts definition.chekku(version, args)
   rescue DefinitionsError => e
     puts "\033[31mERROR: #{e.message}\033[0m\n"
+  end
+
+  def get_definition!(name)
+    @definitions_service.definition_for(name) ||
+      raise(DefinitionNotFoundError, "#{name} definition not found. Check ~/.chekku/def.yml")
   end
 
   def read_file(file)

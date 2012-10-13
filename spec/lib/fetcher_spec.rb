@@ -9,10 +9,10 @@ describe Chekku::Fetcher do
       fetcher.dependencies_from_file
     end
 
-    it 'should return an object with methods corresponding to dependencies' do
-      dependencies_hash = { 'mysql' => { 'existance' => 'which mysqld' }}
+    it 'should return an array of definitions of dependencies' do
+      dependencies_hash = { 'mysql' => { 'executable' => 'mysqld' }}
       YAML.stub(:load_file).and_return(dependencies_hash)
-      fetcher.dependencies_from_file['mysql'].should == { 'existance' =>'which mysqld'}
+      fetcher.dependencies_from_file.first.name.should == 'mysql'
     end
   end
 

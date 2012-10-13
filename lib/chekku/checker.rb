@@ -1,6 +1,5 @@
 require 'pathname'
-require_relative 'dsl'
-require_relative 'definitions_service'
+require_relative 'definitions'
 
 class Chekku::Checker < Thor
   include Thor::Actions
@@ -20,7 +19,7 @@ class Chekku::Checker < Thor
   private
 
   def check_dependencies
-    Chekku::Dsl.evaluate(@chekkufile)
+    Chekku::Definitions.evaluate(@chekkufile)
   end
 
   def verify_chekku_file_existence
