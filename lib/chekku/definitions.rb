@@ -1,4 +1,5 @@
 require_relative 'definition'
+require_relative 'definitions_service'
 
 class Chekku::Definitions
 
