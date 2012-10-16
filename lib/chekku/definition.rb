@@ -15,6 +15,7 @@ class Chekku::Definition
     attributes.each do |name, value|
       send("#{name}=", value)
     end
+    @errors = {}
   end
 
   def chekku(version = nil, args = {})
@@ -48,16 +49,30 @@ class Chekku::Definition
   end
 
   def validates(version, args)
-    ( !version || check_version(version)) || (!args[:must_run] || is_running?) || "Checked #{name} [\033[32m✓\033[0m]"
+    raise(DefinitionValidationError, "#{name}: wrong version: wanted #{version}, got #{installed_version}") unless ( !version || check_version(version))
+    raise(DefinitionValidationError, "#{name}: installed but not running") unless (!args[:must_run] || is_running?)
+    "Checked #{name} [\033[32m✓\033[0m]"
   end
 
   def is_running?
     ps_result = `ps aux | grep #{executable}`
-    ps_result.include?(executable) && (executable == 'grep' || !ps_result.include('grep'))
+    ps_result_array = ps_result.split("\n")
+    ps_result_array.any? do |ps_line|
+      ps_line.include?(executable) && (executable == 'grep' || !ps_line.include?('grep'))
+    end
   end
 
   def check_version(version)
-
+    operator, version = version.split(' ')
+    if version.nil?
+      version = operator
+      operator = '=='
+    end
+    if operator == '~>'
+      installed_version >= Gem::Version.new(version) && installed_version <= Gem::Version.new(version).bump
+    else
+      installed_version.send(operator, Gem::Version.new(version))
+    end
   end
 
   def installed_version
@@ -66,7 +81,7 @@ class Chekku::Definition
     version_matches.each do |version|
       max_dot_number_version = version if version.count('.') > max_dot_number_version.count('.')
     end
-    max_dot_number_version
+    Gem::Version.new(max_dot_number_version)
   end
 
 end
