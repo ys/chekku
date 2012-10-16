@@ -126,5 +126,23 @@ yannick        65646   0.0  0.0  2433432   1072 s000  S     9:37PM   0:00.02 /bi
       definition.is_running?.should be_false
     end
   end
+
+  describe '.validates' do
+    it 'should raise an error if the version is wrong' do
+      definition.stub(:check_version).and_return false
+      definition.stub(:is_running?).and_return true
+      expect{ definition.validates("3.0") }.to raise_error(DefinitionValidationError)
+    end
+    it 'should raise an error if not running but must run arg' do
+      definition.stub(:check_version).and_return true
+      definition.stub(:is_running?).and_return false
+      expect{ definition.validates(nil, must_run: true) }.to raise_error(DefinitionValidationError)
+    end
+    it 'should return string if everything is ok' do
+      definition.stub(:check_version).and_return true
+      definition.stub(:is_running?).and_return true
+      definition.validates("3.0", must_run: true).should == "Checked mysql [\033[32m✓\033[0m]"
+    end
+  end
 end
 

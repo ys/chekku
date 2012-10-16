@@ -48,7 +48,7 @@ class Chekku::Definition
     executable.gsub /&|"|'|;|\s/, ""
   end
 
-  def validates(version, args)
+  def validates(version = nil, args = {})
     raise(DefinitionValidationError, "#{name}: wrong version: wanted #{version}, got #{installed_version}") unless ( !version || check_version(version))
     raise(DefinitionValidationError, "#{name}: installed but not running") unless (!args[:must_run] || is_running?)
     "Checked #{name} [\033[32m✓\033[0m]"
