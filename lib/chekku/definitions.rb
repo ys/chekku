@@ -24,7 +24,7 @@ class Chekku::Definitions
     definition = get_definition! name
     puts definition.chekku(version, args)
   rescue DefinitionsError => e
-    puts "\033[31mERROR: #{e.message}\033[0m\n"
+    puts "#{e.message}\n"
   end
 
   def get_definition!(name)
