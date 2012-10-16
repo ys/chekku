@@ -4,7 +4,6 @@ require 'chekku/errors'
 
 describe Chekku::Definition do
   let(:definition) { Chekku::Definition.new(name: 'mysql', executable: 'mysqld') }
-
   describe ".sanitized_executable" do
     it "should not change a sane command" do
       definition.sanitized_executable.should == "mysqld"
@@ -88,6 +87,44 @@ describe Chekku::Definition do
     end
   end
 
+  let(:version) { Gem::Version.new('5.5.27') }
 
+  describe '.installed_version' do
+    it 'should match 5.5.27 for mysql' do
+      definition.stub(:`).and_return '5.5.27'
+      definition.installed_version.should == version
+    end
+  end
+
+  describe '.check_version' do
+    it 'should be ~> 5.5 for mysql' do
+      definition.stub(:installed_version).and_return version
+      definition.check_version('~> 5.5').should be_true
+    end
+    it 'should be >= 5.3 for mysql' do
+      definition.stub(:installed_version).and_return version
+      definition.check_version('>= 5.3').should be_true
+    end
+    it 'should be <= 5.6 for mysql' do
+      definition.stub(:installed_version).and_return version
+      definition.check_version('<= 5.6').should be_true
+    end
+  end
+
+  describe '.is_running?' do
+    let(:running_return) do %q{yannick        65754   0.0  0.0  2432768    492 s000  R+    9:37PM   0:00.00 grep mysql
+yannick        65717   0.0  1.0  2666308  43300 s000  S     9:37PM   0:00.11 /usr/local/Cellar/mysql/5.5.27/bin/mysqld --basedir=/usr/local/Cellar/mysql/5.5.27 --datadir=/usr/local/var/mysql --plugin-dir=/usr/local/Cellar/mysql/5.5.27/lib/plugin --log-error=/usr/local/var/mysql/foobar.local.err --pid-file=/usr/local/var/mysql/foobar.local.pid
+yannick        65646   0.0  0.0  2433432   1072 s000  S     9:37PM   0:00.02 /bin/sh /usr/local/Cellar/mysql/5.5.27/bin/mysqld_safe --datadir=/usr/local/var/mysql --pid-file=/usr/local/var/mysql/foobar.local.pid}
+    end
+    let(:not_running_return) { %q{yannick        65754   0.0  0.0  2432768    492 s000  R+    9:37PM   0:00.00 grep mysql} }
+    it 'should be true if running' do
+      definition.stub(:`).and_return running_return
+      definition.is_running?.should be_true
+    end
+    it 'should be false if not running' do
+      definition.stub(:`).and_return not_running_return
+      definition.is_running?.should be_false
+    end
+  end
 end
 
