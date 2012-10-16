@@ -21,11 +21,15 @@ class Chekku::Definitions
     puts "\033[31mERROR: Please verify the syntax of your Chekkufile"
   end
 
-  def check(name, version = nil, args ={})
+  def check(name, version = nil, args = {})
+    unless version.is_a?(String)
+      args = version || {}
+      version = nil
+    end
     definition = get_definition! name
     puts definition.chekku(version, args)
   rescue DefinitionsError => e
-    puts "[\033[31m✗\033[0m]Checked #{name}: #{e.message}\n"
+    puts "[\033[31m✗\033[0m] #{name}: #{e.message}\n"
   rescue ChekkuError => e
     puts "\033[31mERROR: #{e.message}\033[0m\n"
   end

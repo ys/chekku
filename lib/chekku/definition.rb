@@ -21,7 +21,7 @@ class Chekku::Definition
   def chekku(version = nil, args = {})
     raise(DefinitionValidationError, "not installed") unless exists?
     validates version, args
-    "[\033[32m✓\033[0m]Checked #{name}"
+    "[\033[32m✓\033[0m] #{name}"
   end
 
   def exists?

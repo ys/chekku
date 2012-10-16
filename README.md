@@ -33,9 +33,10 @@ This is the file that contains the dependencies we need to checks.
 Chekkufile :
 
 ```ruby
-check 'mysql', '>= 5.0'
+check 'mysql', must_run: true
 check 'redis'
-check 'mongod', '~> 1.0', must_run: true
+check 'postgres', "~> 9.2", must_run: true
+check 'imagemagick', "<= 4"
 ```
 
 ## def.yml
