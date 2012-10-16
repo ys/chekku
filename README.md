@@ -3,7 +3,7 @@ The gem that checks your software dependencies
 
 ## WARNING
 
-**This gem is in alpha mode! Please use it carefully.**
+**This gem is in early version! Please use it carefully.**
 
 ## Installation
 
@@ -28,14 +28,14 @@ Or install it yourself as:
 
 ## Chekkufile
 
-This is the file that contains the dependencies we need to check
+This is the file that contains the dependencies we need to checks.
 
 Chekkufile :
 
 ```ruby
- check 'mysql', '>= 5.0', env: :production
- check 'redis'
- check 'mongod', '~> 1.0', env: :development, must_run: true
+check 'mysql', '>= 5.0'
+check 'redis'
+check 'mongod', '~> 1.0', must_run: true
 ```
 
 ## def.yml
@@ -53,12 +53,11 @@ imagemagick:
   executable: 'convert'
 ```
 
-**I'm currently working on a webapp to define online all the values for this file. So it will be community based.**
 
 ## Future
 
-I'll try to have a version that works for checking the version of the dependecy in the near future.
-And will add tests to check if the service is running or not.
+**I'm currently working on a webapp to define online all the values for this file. So it will be community based.**
+
 
 ## Contributing
 
