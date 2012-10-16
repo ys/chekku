@@ -1,3 +1,4 @@
+#encoding: utf-8
 require_relative 'definition'
 require_relative 'definitions_service'
 
@@ -24,7 +25,9 @@ class Chekku::Definitions
     definition = get_definition! name
     puts definition.chekku(version, args)
   rescue DefinitionsError => e
-    puts "#{e.message}\n"
+    puts "[\033[31m✗\033[0m]Checked #{name}: #{e.message}\n"
+  rescue ChekkuError => e
+    puts "\033[31mERROR: #{e.message}\033[0m\n"
   end
 
   def get_definition!(name)

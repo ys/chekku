@@ -77,13 +77,13 @@ describe Chekku::Definition do
   end
 
   describe '.chekku' do
-    it 'should if definition exists says ✓' do
+    it 'should says ✓ if soft exists' do
       definition.stub(:exists?).and_return(true)
-      definition.chekku.should == "Checked mysql [\033[32m✓\033[0m]"
+      definition.chekku.should == "[\033[32m✓\033[0m]Checked mysql"
     end
-    it 'should if definition exists says x' do
+    it 'should says x if soft does not exist' do
       definition.stub(:exists?).and_return(false)
-      definition.chekku.should == "Checked mysql [\033[31m✗\033[0m] I think you must install it!"
+      expect { definition.chekku }.to raise_error(DefinitionValidationError)
     end
   end
 
@@ -138,10 +138,10 @@ yannick        65646   0.0  0.0  2433432   1072 s000  S     9:37PM   0:00.02 /bi
       definition.stub(:is_running?).and_return false
       expect{ definition.validates(nil, must_run: true) }.to raise_error(DefinitionValidationError)
     end
-    it 'should return string if everything is ok' do
+    it 'should be tru if everything is ok' do
       definition.stub(:check_version).and_return true
       definition.stub(:is_running?).and_return true
-      definition.validates("3.0", must_run: true).should == "Checked mysql [\033[32m✓\033[0m]"
+      definition.validates("3.0", must_run: true).should be_true
     end
   end
 end

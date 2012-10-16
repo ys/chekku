@@ -1,5 +1,6 @@
 class DefinitionsError < StandardError; end
-class AppNameNotSaneError < DefinitionsError; end
-class AppNameNotStringError < DefinitionsError; end
-class DefinitionNotFoundError < DefinitionsError; end
+class ChekkuError < StandardError; end
+class AppNameNotSaneError < ChekkuError; end
+class AppNameNotStringError < ChekkuError; end
+class DefinitionNotFoundError < ChekkuError; end
 class DefinitionValidationError < DefinitionsError; end

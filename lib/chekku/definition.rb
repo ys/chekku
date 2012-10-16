@@ -19,11 +19,9 @@ class Chekku::Definition
   end
 
   def chekku(version = nil, args = {})
-    if exists?
-      validates version, args
-    else
-      "Checked #{name} [\033[31m✗\033[0m] I think you must install it!"
-    end
+    raise(DefinitionValidationError, "not installed") unless exists?
+    validates version, args
+    "[\033[32m✓\033[0m]Checked #{name}"
   end
 
   def exists?
@@ -49,9 +47,9 @@ class Chekku::Definition
   end
 
   def validates(version = nil, args = {})
-    raise(DefinitionValidationError, "Checked #{name} [\033[31m✗\033[0m] wrong version: wanted #{version}, got #{installed_version}") unless ( !version || check_version(version))
-    raise(DefinitionValidationError, "Checked #{name} [\033[31m✗\033[0m] installed but not running (must_run: true)") unless (!args[:must_run] || is_running?)
-    "Checked #{name} [\033[32m✓\033[0m]"
+    raise(DefinitionValidationError, "wrong version: wanted #{version}, got #{installed_version}") unless ( !version || check_version(version))
+    raise(DefinitionValidationError, "installed but not running (must_run: true)") unless (!args[:must_run] || is_running?)
+    true
   end
 
   def is_running?
