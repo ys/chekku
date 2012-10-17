@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'chekku/fetcher'
 
 describe Chekku::Fetcher do

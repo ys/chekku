@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'chekku/definitions_service'
 require 'chekku/errors'
 

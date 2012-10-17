@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version     = '>= 1.9'
   gem.required_rubygems_version = '>= 1.3.6'
   gem.add_development_dependency 'rspec', '>= 2.0'
+  gem.add_development_dependency 'simplecov'
   gem.add_dependency 'thor'
   gem.add_dependency 'rake'
   gem.files         = `git ls-files`.split($/)
