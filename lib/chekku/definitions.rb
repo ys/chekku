@@ -42,7 +42,7 @@ class Chekku::Definitions
       version = nil
     end
     definition = get_definition! name
-    puts definition.chekku(version, args)
+    puts "[\033[32m✓\033[0m] #{name}" if definition.chekku(version, args)
   rescue DefinitionsError => e
     puts "[\033[31m✗\033[0m] #{name}: #{e.message}\n"
   rescue ChekkuError => e
