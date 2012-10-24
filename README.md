@@ -54,6 +54,18 @@ imagemagick:
   executable: 'convert'
 ```
 
+## Use Definition object in your code
+
+Example on how to check a software dependency
+
+```
+require 'chekku/definition'
+definition = Chekku::Definition.new(name: 'mysql', executable: 'mysqld')
+# return true or false
+definition.chekku('>= 5.0')
+#return true or raise an error
+definition.chekku!('> 5.0')
+```
 
 ## Future
 
