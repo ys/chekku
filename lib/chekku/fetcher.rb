@@ -8,7 +8,11 @@ class Chekku::Fetcher
 
   attr_accessor :dependencies
 
-  def self.fetch_for_chekkufile(file)
+  # Fetch the Definitions from the file
+  #
+  # @param [String] file_path Path to Chekkufile
+  # @return [Array] a list of Definition instances
+  def self.fetch_for_chekkufile(file_path)
     # TODO: Implements server side of the file checker
     # STUB: Load local file
     fetcher = new

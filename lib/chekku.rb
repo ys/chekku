@@ -4,6 +4,8 @@ require 'thor/group'
 require 'chekku/errors'
 
 module Chekku
+  # Launch the whole process of software dependencies checking
+  #
   class Command
     if ARGV.first ==  'version'
       puts Chekku::VERSION

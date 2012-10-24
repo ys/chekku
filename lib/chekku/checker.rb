@@ -10,6 +10,7 @@ class Chekku::Checker < Thor
 
   method_option :chekkufile, type: :string, desc: 'Chekkufile Path', default: 'Chekkufile'
 
+  # Checks the software dependencies based on the chekku files
   def checks
     @chekkufile = options[:chekkufile]
     verify_chekku_file_existence

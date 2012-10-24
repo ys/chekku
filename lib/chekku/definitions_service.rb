@@ -4,11 +4,18 @@ class Chekku::DefinitionsService
 
   attr_accessor :definitions
 
-  def load_definitions_for(file)
-    @definitions = Chekku::Fetcher.fetch_for_chekkufile file
+  # load the Definition list for the needed dependencies
+  #
+  # @param [String] file_path Path to Chekkufile
+  def load_definitions_for(file_path)
+    @definitions = Chekku::Fetcher.fetch_for_chekkufile file_path
   end
 
-  def definition_for(dependency)
-    @definitions.select{ |definition| definition.name == dependency }.first if @definitions
+  # Retrieve one Definition from the list
+  #
+  # @param [String] definition_name The needed Definition name
+  # @return [Definition] The needed Definition
+  def definition_for(definition_name)
+    @definitions.select{ |definition| definition.name == definition_name }.first if @definitions
   end
 end
