@@ -77,14 +77,27 @@ describe Chekku::Definition do
     end
   end
 
+  describe '.chekku!' do
+    it 'should says ✓ if soft exists' do
+      definition.stub(:exists?).and_return(true)
+      definition.chekku!.should be_true
+    end
+
+    it 'should says x if soft does not exist' do
+      definition.stub(:exists?).and_return(false)
+      expect { definition.chekku! }.to raise_error(DefinitionValidationError)
+    end
+  end
+
   describe '.chekku' do
     it 'should says ✓ if soft exists' do
       definition.stub(:exists?).and_return(true)
-      definition.chekku.should == "[\033[32m✓\033[0m] mysql"
+      definition.chekku.should be_true
     end
+
     it 'should says x if soft does not exist' do
       definition.stub(:exists?).and_return(false)
-      expect { definition.chekku }.to raise_error(DefinitionValidationError)
+      definition.chekku.should be_false
     end
   end
 
