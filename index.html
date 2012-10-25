@@ -1,41 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Chekku by ys</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <title>Chekku by ys</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Chekku</h1>
-        <p>That gem knows if your software dependencies are met!</p>
+    <div id="container">
+      <div class="inner">
 
-        <p class="view"><a href="https://github.com/ys/chekku">View the Project on GitHub <small>ys/chekku</small></a></p>
+        <header>
+          <h1>Chekku</h1>
+          <h2>That gem knows if your software dependencies are met!</h2>
+        </header>
 
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/ys/chekku/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/ys/chekku/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/ys/chekku" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
-        <ul>
-          <li><a href="https://github.com/ys/chekku/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/ys/chekku/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/ys/chekku">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>Chekku <a href="http://travis-ci.org/ys/chekku"><img src="https://secure.travis-ci.org/ys/chekku.png" alt="Build Status"></a>
+        <hr>
+
+        <section id="main_content">
+          <h1>Chekku <a href="http://travis-ci.org/ys/chekku"><img src="https://secure.travis-ci.org/ys/chekku.png" alt="Build Status"></a>
 </h1>
 
 <p>The gem that checks your software dependencies</p>
 
 <h2>WARNING</h2>
 
-<p><strong>This gem is in alpha mode! Please use it carefully.</strong></p>
+<p><strong>This gem is in beta version! Please use it carefully.</strong></p>
 
 <h2>Installation</h2>
 
@@ -62,13 +65,14 @@
 
 <h2>Chekkufile</h2>
 
-<p>This is the file that contains the dependencies we need to check</p>
+<p>This is the file that contains the dependencies we need to checks.</p>
 
 <p>Chekkufile :</p>
 
-<div class="highlight"><pre> <span class="n">check</span> <span class="s1">'mysql'</span><span class="p">,</span> <span class="s1">'&gt;= 5.0'</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="ss">:production</span>
- <span class="n">check</span> <span class="s1">'redis'</span>
- <span class="n">check</span> <span class="s1">'mongod'</span><span class="p">,</span> <span class="s1">'~&gt; 1.0'</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="ss">:development</span><span class="p">,</span> <span class="n">must_run</span><span class="p">:</span> <span class="kp">true</span>
+<div class="highlight"><pre><span class="n">check</span> <span class="s1">'mysql'</span><span class="p">,</span> <span class="n">must_run</span><span class="p">:</span> <span class="kp">true</span>
+<span class="n">check</span> <span class="s1">'redis'</span>
+<span class="n">check</span> <span class="s1">'postgres'</span><span class="p">,</span> <span class="s2">"~&gt; 9.2"</span><span class="p">,</span> <span class="n">must_run</span><span class="p">:</span> <span class="kp">true</span>
+<span class="n">check</span> <span class="s1">'imagemagick'</span><span class="p">,</span> <span class="s2">"&lt;= 4"</span>
 </pre></div>
 
 <h2>def.yml</h2>
@@ -85,12 +89,21 @@ imagemagick:
   executable: 'convert'
 </code></pre>
 
-<p><strong>I'm currently working on a webapp to define online all the values for this file. So it will be community based.</strong></p>
+<h2>Use Definition object in your code</h2>
+
+<p>Example on how to check a software dependency</p>
+
+<pre><code>require 'chekku/definition'
+definition = Chekku::Definition.new(name: 'mysql', executable: 'mysqld')
+# return true or false
+definition.chekku('&gt;= 5.0')
+#return true or raise an error
+definition.chekku!('&gt; 5.0')
+</code></pre>
 
 <h2>Future</h2>
 
-<p>I'll try to have a version that works for checking the version of the dependecy in the near future.
-And will add tests to check if the service is running or not.</p>
+<p><strong>I'm currently working on a webapp to define online all the values for this file. So it will be community based.</strong></p>
 
 <h2>Contributing</h2>
 
@@ -101,13 +114,25 @@ And will add tests to check if the service is running or not.</p>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create new Pull Request</li>
 </ol>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/ys">ys</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+        </section>
+
+        <footer>
+          Chekku is maintained by <a href="https://github.com/ys">ys</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+                  <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-35839693-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
   </body>
 </html>
