@@ -6,7 +6,7 @@ describe Chekku::Fetcher do
   describe ".dependencies_for_file" do
     let(:fetcher) { Chekku::Fetcher.new() }
     it 'should call YAML.load_file' do
-      YAML.should_receive(:load_file).with("#{ENV['HOME']}/.chekku/def.yml")
+      YAML.should_receive(:load_file).at_least(1).with("#{Dir.home}/.chekku/def.yml").and_return({})
       fetcher.dependencies_from_file
     end
 
