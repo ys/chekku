@@ -1,9 +1,5 @@
 # Chekku [![Build Status](https://secure.travis-ci.org/ys/chekku.png)](http://travis-ci.org/ys/chekku)
-The gem that checks your software dependencies
-
-## WARNING
-
-**This gem is in early version! Please use it carefully.**
+The gem that checks your software dependencies and install you the missing ones!
 
 ## Installation
 
