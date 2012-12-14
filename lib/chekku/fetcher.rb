@@ -43,10 +43,10 @@ class Chekku::Fetcher
 
   def ensure_definitions_are_up_to_date(definitions_yaml)
     last_updated = definitions_yaml.delete('updated_at')
-    definitions_yaml.tap do |definitions_yaml|
-      if too_long_ago?(last_updated)
-        defintions_yaml = fetch_new_distant_definitions
-      end
+    if too_long_ago?(last_updated)
+      fetch_new_distant_definitions
+    else
+      definitions_yaml
     end
   end
 

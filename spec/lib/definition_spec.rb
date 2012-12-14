@@ -85,7 +85,7 @@ describe Chekku::Definition do
 
     it 'should says x if soft does not exist' do
       definition.stub(:exists?).and_return(false)
-      expect { definition.chekku! }.to raise_error(DefinitionValidationError)
+      expect { definition.chekku! }.to raise_error(NotInstalledError)
     end
   end
 

@@ -15,14 +15,18 @@ class Chekku::Installer
   private
 
   def ask_user(app_name)
-    puts "Would you like to install #{app_name}? (y)es/(n)o/(a)ll/none"
-    gets.downcase
+    print "Would you like to install #{app_name}? (y)es/(n)o/(a)ll/none : "
+    gets.downcase.chomp
   end
 
   def install_app(app_name)
     if RbConfig::CONFIG['host_os'].include? 'darwin'
-      puts "it's a mac"
-      `brew install #{app_name}`
+      system "brew install #{app_name}"
+      if $?.exitstatus == 0
+        "Installation of #{app_name} done"
+      else
+        "Installation of #{app_name} failed"
+      end
     else
       puts "[\033[31m✗\033[0m] We Only support OSX for installation for the moment\n"
     end
