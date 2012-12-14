@@ -1,6 +1,7 @@
 #encoding: utf-8
 require_relative 'definition'
 require_relative 'definitions_service'
+require_relative 'installer'
 
 class Chekku::Definitions
 
@@ -17,6 +18,7 @@ class Chekku::Definitions
   def initialize
     @definitions_service = Chekku::DefinitionsService.new
     @definitions_service.load_definitions_for @chekkufile
+    @installer ||= Chekku::Installer.new
   end
 
   # Parse the file and evaluate every dependency
@@ -49,7 +51,6 @@ class Chekku::Definitions
     puts "\033[31mERROR: #{e.message}\033[0m\n"
   rescue NotInstalledError => e
     puts "[\033[31m✗\033[0m] #{name}: #{e.message}\n"
-    @installer ||= Chekku::Installer.new
     @installer.install_app? name
   end
 

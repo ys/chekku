@@ -4,3 +4,4 @@ class AppNameNotSaneError < ChekkuError; end
 class AppNameNotStringError < ChekkuError; end
 class DefinitionNotFoundError < ChekkuError; end
 class DefinitionValidationError < DefinitionsError; end
+class NotInstalledError < StandardError; end
