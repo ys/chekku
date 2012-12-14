@@ -16,6 +16,6 @@ class Chekku::DefinitionsService
   # @param [String] definition_name The needed Definition name
   # @return [Definition] The needed Definition
   def definition_for(definition_name)
-    @definitions.select{ |definition| definition.name == definition_name }.first if @definitions
+    @definitions.detect{ |definition| definition.name == definition_name } if @definitions
   end
 end
