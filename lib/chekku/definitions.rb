@@ -47,6 +47,10 @@ class Chekku::Definitions
     puts "[\033[31m✗\033[0m] #{name}: #{e.message}\n"
   rescue ChekkuError => e
     puts "\033[31mERROR: #{e.message}\033[0m\n"
+  rescue NotInstalledError => e
+    puts "[\033[31m✗\033[0m] #{name}: #{e.message}\n"
+    @installer ||= Chekku::Installer.new
+    @installer.install_app? name
   end
 
   # Retrieve the Definition instance from the DefinitionService

@@ -45,7 +45,7 @@ module Chekku
     # @raise [AppNameNotStringError] if Definition is not correct and executable isn't a string
     # @raise [AppNameNotSaneError] if Definition executable isn't safe (spaces, special chars and so on)
     def chekku!(version = nil, args = {})
-      raise(DefinitionValidationError, "not installed") unless exists?
+      raise(NotInstalledError, "not installed") unless exists?
       validates version, args
     end
 
