@@ -26,8 +26,9 @@ class Chekku::Fetcher
   end
 
   def definitions_hash
-     begin
+    begin
       definitions_yaml = load_definitions_file
+    rescue
     ensure
       definitions_yaml ||= {}
     end
@@ -41,7 +42,7 @@ class Chekku::Fetcher
   end
 
   def ensure_definitions_are_up_to_date(definitions_yaml)
-    last_updated = definitions_yaml.delete(:last_updated)
+    last_updated = definitions_yaml.delete('updated_at')
     definitions_yaml.tap do |definitions_yaml|
       if too_long_ago?(last_updated)
         defintions_yaml = fetch_new_distant_definitions
@@ -52,7 +53,7 @@ class Chekku::Fetcher
   def fetch_new_distant_definitions
     ensure_presence_of_chekku_dir
     renew_chekku_definitions_file
-    load_definitions_file.tap { |definitions_yaml| definitions_yaml.delete(:updated_at) }
+    load_definitions_file.tap { |definitions_yaml| definitions_yaml.delete('updated_at') }
   end
 
   def ensure_presence_of_chekku_dir
@@ -73,7 +74,7 @@ class Chekku::Fetcher
     http.request(request).body
   end
 
-  def too_long_ago?(date_string)
-    date_string.nil? || Date.parse(date_string) > (Date.today - MAX_DAYS)
+  def too_long_ago?(date)
+    date.nil? || date > (Date.today - MAX_DAYS)
   end
 end
