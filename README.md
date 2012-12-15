@@ -63,9 +63,9 @@ definition.chekku('>= 5.0')
 definition.chekku!('> 5.0')
 ```
 
-## Future
+## Web app for definitions file
 
-**I'm currently working on a webapp to define online all the values for this file. So it will be community based.**
+**You can visit [the web part](http://chekku.co) from where the definitions are loaded. You can add new in just two steps.**
 
 
 ## Contributing
